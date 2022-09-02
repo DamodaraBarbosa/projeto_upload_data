@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import date
+from datetime import date as dt
 
 from data_class import Game
 
@@ -16,4 +16,8 @@ class Database(Game):
             return 'The game searched does not exist in our database!'
     
     def data_to_date(self):
+        self.data['ADDED'] = pd.to_datetime(self.data['ADDED'])
+        data_of_game = self.data.query(f'GAME == "{self._name}"')
+        print(self.data.iloc[data_of_game.index]['ADDED'])
+        return (dt.today() - self.data.iloc[data_of_game.index]['ADDED'])
         

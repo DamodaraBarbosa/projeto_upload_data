@@ -9,4 +9,5 @@ data_gamepass = pd.read_csv('utils\data_gamepass_tratado.csv')
 game = str(input('What game do you want to search? '))
 gamepass = Database(data_gamepass, game)
 
-print(gamepass.data_game())
+print(gamepass.data_to_date())
+
