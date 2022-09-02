@@ -1,5 +1,5 @@
 import pandas as pd
-from datetime import date as dt
+from datetime import datetime as dt
 
 from data_class import Game
 
@@ -18,6 +18,12 @@ class Database(Game):
     def data_to_date(self):
         self.data['ADDED'] = pd.to_datetime(self.data['ADDED'])
         data_of_game = self.data.query(f'GAME == "{self._name}"')
-        print(self.data.iloc[data_of_game.index]['ADDED'])
-        return (dt.today() - self.data.iloc[data_of_game.index]['ADDED'])
         
+        # data_of_game.index retorna 'pandas.core.indexes.numeric.Int64Index', o uso do [0] seleciona apenas 
+        # o valor do index, também se instancia a variável game_index
+        game_index = data_of_game.index[0]
+        
+        # o uso de game_index garante que seja selecionado o jogo procurado e assim se determine o tempo no Gamepass
+        return f'{self._name} has been {abs(dt.today() - data_of_game["ADDED"][game_index]).days} days on Xbox Gamepass.'
+            
+    
