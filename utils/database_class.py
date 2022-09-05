@@ -1,6 +1,5 @@
 import pandas as pd
 from datetime import datetime as dt
-
 from data_class import Game
 
 class Database(Game):
@@ -25,5 +24,12 @@ class Database(Game):
         
         # o uso de game_index garante que seja selecionado o jogo procurado e assim se determine o tempo no Gamepass
         return f'{self._name} has been {abs(dt.today() - data_of_game["ADDED"][game_index]).days} days on Xbox Gamepass.'
-            
+    
+    def top_ranking(self):
+        top_10 = self._data.sort_values('GAMERS', ascending= False)[0:10]
+
+        # para que o index fique do 1º ao 10º, faz-se uma pequena modificação
+        top_10.index.name = range(1, 11)
+
+        return top_10
     

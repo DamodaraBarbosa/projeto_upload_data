@@ -9,5 +9,5 @@ data_gamepass = 'utils\data_gamepass_tratado.csv'
 game = str(input('What game do you want to search? '))
 gamepass = Database(data_gamepass, game)
 
-print(gamepass.dataframe)
+print(gamepass.top_ranking())
 
